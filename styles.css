@@ -1,0 +1,290 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 1rem 2rem 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f6faff;
+  color: #111;
+  user-select: none;
+}
+
+h1,
+h2 {
+  color: #00796b;
+  margin-bottom: 0.2rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 1rem;
+  border-bottom: 2px solid #00796b;
+  padding-bottom: 0.2rem;
+}
+
+p {
+  font-weight: 500;
+  max-width: 450px;
+}
+
+.cursor-config {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 0 12px -4px #00796b99;
+  padding: 1.5rem;
+  margin-top: 1.4rem;
+}
+
+.shape-section {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.shape-section label {
+  min-width: 60px;
+}
+
+.circle-controls {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+fieldset {
+  border: 1px solid #00796b99;
+  border-radius: 6px;
+  flex: 1;
+  min-width: 240px;
+  padding: 0.85rem 1rem 1.1rem 1rem;
+}
+
+fieldset legend {
+  font-weight: 700;
+  color: #00796b;
+  padding: 0 0.4rem;
+}
+
+label {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.925rem;
+  user-select: none;
+  font-weight: 600;
+}
+
+input[type="color"],
+select,
+input[type="number"],
+input[type="range"],
+textarea {
+  margin-top: 0.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.2rem 0.4rem;
+  font-size: 1rem;
+  border: 1.5px solid #bbb;
+  border-radius: 4px;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-color: #fff;
+  transition: border-color 0.25s ease;
+  resize: vertical;
+}
+
+input[type="number"]:focus,
+input[type="color"]:focus,
+input[type="range"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #00a895;
+  box-shadow: 0 0 6px #00a895aa;
+}
+
+input[type="range"] {
+  height: 30px;
+}
+
+output {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-weight: 600;
+  color: #00796bcc;
+  width: 2.2rem;
+  text-align: center;
+}
+
+#preview-section {
+  margin-top: 3rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 12px -4px #00796b99;
+  padding: 1.5rem;
+}
+
+#preview-area, html {
+  cursor: var(--cursor-base, auto);
+}
+
+#preview-area a,
+#preview-area button,
+#preview-area input[type="radio"],
+#preview-area input[type="checkbox"] {
+  cursor: var(--cursor-hover, pointer);
+}
+
+#output-container {
+  margin-top: 3rem;
+  padding-top: 0.5rem;
+}
+
+#generated-css-title {
+  margin-bottom: 0.25rem;
+  user-select: text;
+  font-weight: 700;
+  color: #00796b;
+  display: inline-block;
+}
+
+#copy-button {
+  margin-left: 1rem;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #00a895;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#copy-button:hover,
+#copy-button:focus {
+  background-color: #008874;
+  outline: none;
+}
+
+#css-output {
+  margin-top: 0.6rem;
+  background: #072d27ee;
+  color: #a6deddde;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-family: "Fira Mono", monospace, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  user-select: all;
+  min-height: 10rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  box-shadow: 0 0 12px -6px #00796bdd inset;
+  position: relative;
+  tab-size: 2;
+}
+
+/* Custom scrollbar for output */
+#css-output::-webkit-scrollbar {
+  height: 12px;
+  width: 10px;
+}
+
+#css-output::-webkit-scrollbar-thumb {
+  background-color: #01937caa;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+#css-output::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+small {
+  color: #555;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.25rem;
+  user-select: text;
+  font-style: italic;
+}
+
+footer {
+  margin-top: 4rem;
+  text-align: center;
+  color: #555;
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+/* Hotspot 3x3 grid styles */
+.hotspot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(3, 30px);
+  gap: 6px;
+  max-width: 110px;
+  margin-top: 0.5rem;
+}
+
+.hotspot-grid button[role="radio"] {
+  background-color: #e0f2ef;
+  border: 2px solid #00796b;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  position: relative;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.hotspot-grid button[role="radio"][aria-checked="true"] {
+  background-color: #00a895;
+  border-color: #004d40;
+  outline-offset: 0px;
+}
+
+.hotspot-grid button[role="radio"]:focus {
+  outline: 2px solid #00332f;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom SVG Cursor CSS Generator</title>
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>Custom Cursor CSS Generator</h1>
+    <p>Configure the SVG cursors for <code>html</code> and for <code>a, button, input[type=radio], input[type=checkbox]</code>.</p>
+
+    <section class="cursor-config" id="base-cursor">
+      <h2>Base Cursor (html)</h2>
+      <div class="shape-section">
+        <label for="base-shape">Shape:</label>
+        <select id="base-shape" aria-label="Base cursor shape">
+          <option value="circle">Circle</option>
+          <option value="square">Square</option>
+          <option value="triangle-up">Triangle (Up)</option>
+          <option value="triangle-down">Triangle (Down)</option>
+          <option value="diamond">Diamond</option>
+          <option value="custom">Custom SVG</option>
+        </select>
+      </div>
+
+      <div class="circle-controls">
+        <fieldset class="preset-fields">
+          <legend>Outer shape</legend>
+          <label for="base-outer-size">Size (px):</label>
+          <input id="base-outer-size" type="number" min="1" max="256" value="20" />
+          <label for="base-outer-color">Color:</label>
+          <input id="base-outer-color" type="color" value="#00a895" />
+          <label for="base-outer-opacity">Opacity:</label>
+          <input id="base-outer-opacity" type="range" min="0" max="1" step="0.01" value="0.1" />
+          <output for="base-outer-opacity" id="base-outer-opacity-value">0.5</output>
+        </fieldset>
+
+        <fieldset class="preset-fields">
+          <legend>Inner shape</legend>
+          <label for="base-inner-size">Size (px):</label>
+          <input id="base-inner-size" type="number" min="1" max="100" value="6" />
+          <label for="base-inner-color">Color:</label>
+          <input id="base-inner-color" type="color" value="#00a895" />
+          <label for="base-inner-opacity">Opacity:</label>
+          <input id="base-inner-opacity" type="range" min="0" max="1" step="0.01" value="1" />
+          <output for="base-inner-opacity" id="base-inner-opacity-value">1</output>
+        </fieldset>
+      </div>
+      <fieldset id="base-cursor-hotspot-fieldset" style="margin-top: 1rem;">
+        <legend>Cursor Hotspot (Origin) for Base Cursor</legend>
+        <div id="base-hotspot-grid" class="hotspot-grid" role="radiogroup" aria-label="Base cursor hotspot selection">
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="0" tabindex="-1" title="Top Left" aria-label="Top Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="0" tabindex="-1" title="Top Center" aria-label="Top Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="0" tabindex="-1" title="Top Right" aria-label="Top Right"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="50" tabindex="-1" title="Middle Left" aria-label="Middle Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="50" tabindex="-1" title="Center" aria-label="Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="50" tabindex="-1" title="Middle Right" aria-label="Middle Right"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="100" tabindex="-1" title="Bottom Left" aria-label="Bottom Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="100" tabindex="-1" title="Bottom Center" aria-label="Bottom Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="100" tabindex="-1" title="Bottom Right" aria-label="Bottom Right"></button>
+        </div>
+        <small>Select the origin point (hotspot) inside the cursor image.</small>
+      </fieldset>
+
+      <fieldset id="custom-svg-fieldset" style="display:none; margin-top: 1rem;">
+        <legend>Custom SVG (for Base Cursor)</legend>
+        <label for="base-custom-svg" class="visually-hidden">Enter your custom SVG markup</label>
+        <textarea id="base-custom-svg" placeholder="Paste your SVG markup here (only inner content, without &lt;svg&gt; tags)" rows="6" spellcheck="false" style="width:100%; font-family: monospace; font-size: 0.9rem; resize: vertical;">
+        <path d="M4.40701 3.41403C3.94876 3.27925 3.71963 3.21186 3.56363 3.27001C3.42768 3.32069 3.32045 3.42793 3.26977 3.56387C3.21162 3.71988 3.27901 3.949 3.41379 4.40726L7.61969 18.7073C7.74493 19.1332 7.80756 19.3461 7.93395 19.4449C8.04424 19.5312 8.18564 19.5672 8.32377 19.5443C8.48206 19.5181 8.639 19.3611 8.95286 19.0473L11.9999 16.0002L16.4343 20.4345C16.6323 20.6325 16.7313 20.7315 16.8454 20.7686C16.9459 20.8012 17.054 20.8012 17.1545 20.7686C17.2686 20.7315 17.3676 20.6325 17.5656 20.4345L20.4343 17.5659C20.6323 17.3679 20.7313 17.2689 20.7684 17.1547C20.801 17.0543 20.801 16.9461 20.7684 16.8457C20.7313 16.7315 20.6323 16.6325 20.4343 16.4345L15.9999 12.0002L19.047 8.95311C19.3609 8.63924 19.5178 8.48231 19.5441 8.32402C19.567 8.18589 19.5309 8.04448 19.4447 7.93419C19.3458 7.8078 19.1329 7.74518 18.7071 7.61993L4.40701 3.41403Z" stroke="#00796b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </textarea>
+        <label for="base-custom-size">Size (px):</label>
+        <input id="base-custom-size" type="number" min="1" max="256" value="32" />
+        <label for="base-custom-color">Color (fill):</label>
+        <input id="base-custom-color" type="color" value="#00a895" />
+        <small>Enter valid SVG elements inside &lt;svg&gt; (do not include &lt;svg&gt; wrapper). Example: &lt;circle cx="10" cy="10" r="10" fill="red"/&gt;. Color will replace fill attributes if applicable.</small>
+      </fieldset>
+      <small>Note: If you pick a shape that can't have inner shape (like triangle), inner shape will be also drawn as the same shape but smaller, same fill.</small>
+    </section>
+
+    <section class="cursor-config" id="hover-cursor">
+      <h2>Hover Cursor (a, button, input[type=radio], input[type=checkbox])</h2>
+      <div class="shape-section">
+        <label for="hover-shape">Shape:</label>
+        <select id="hover-shape" aria-label="Hover cursor shape">
+          <option value="circle">Circle</option>
+          <option value="square">Square</option>
+          <option value="triangle-up">Triangle (Up)</option>
+          <option value="triangle-down">Triangle (Down)</option>
+          <option value="diamond">Diamond</option>
+          <option value="custom">Custom SVG</option>
+        </select>
+      </div>
+      <fieldset class="preset-fields">
+        <legend>Shape</legend>
+        <label for="hover-size">Size (px):</label>
+        <input id="hover-size" type="number" min="1" max="256" value="12" />
+        <label for="hover-color">Color:</label>
+        <input id="hover-color" type="color" value="#00a895" />
+        <label for="hover-opacity">Opacity:</label>
+        <input id="hover-opacity" type="range" min="0" max="1" step="0.01" value="1" />
+        <output for="hover-opacity" id="hover-opacity-value">1</output>
+      </fieldset>
+      <fieldset id="hover-cursor-hotspot-fieldset" style="margin-top: 1rem;">
+        <legend>Cursor Hotspot (Origin) for Hover Cursor</legend>
+        <div id="hover-hotspot-grid" class="hotspot-grid" role="radiogroup" aria-label="Hover cursor hotspot selection">
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="0" tabindex="-1" title="Top Left" aria-label="Top Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="0" tabindex="-1" title="Top Center" aria-label="Top Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="0" tabindex="-1" title="Top Right" aria-label="Top Right"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="50" tabindex="-1" title="Middle Left" aria-label="Middle Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="50" tabindex="-1" title="Center" aria-label="Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="50" tabindex="-1" title="Middle Right" aria-label="Middle Right"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="0" data-hoty="100" tabindex="-1" title="Bottom Left" aria-label="Bottom Left"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="50" data-hoty="100" tabindex="-1" title="Bottom Center" aria-label="Bottom Center"></button>
+          <button type="button" aria-checked="false" role="radio" data-hotx="100" data-hoty="100" tabindex="-1" title="Bottom Right" aria-label="Bottom Right"></button>
+        </div>
+        <small>Select the origin point (hotspot) inside the cursor image.</small>
+      </fieldset>
+      <fieldset id="hover-custom-svg-fieldset" style="display:none; margin-top: 1rem;">
+        <legend>Custom SVG (for Hover Cursor)</legend>
+        <label for="hover-custom-svg" class="visually-hidden">Enter your custom SVG markup</label>
+        <textarea id="hover-custom-svg" placeholder="Paste your SVG markup here (only inner content, without &lt;svg&gt; tags)" rows="6" spellcheck="false" style="width:100%; font-family: monospace; font-size: 0.9rem; resize: vertical;">
+        <path d="M4.40701 3.41403C3.94876 3.27925 3.71963 3.21186 3.56363 3.27001C3.42768 3.32069 3.32045 3.42793 3.26977 3.56387C3.21162 3.71988 3.27901 3.949 3.41379 4.40726L7.61969 18.7073C7.74493 19.1332 7.80756 19.3461 7.93395 19.4449C8.04424 19.5312 8.18564 19.5672 8.32377 19.5443C8.48206 19.5181 8.639 19.3611 8.95286 19.0473L11.9999 16.0002L16.4343 20.4345C16.6323 20.6325 16.7313 20.7315 16.8454 20.7686C16.9459 20.8012 17.054 20.8012 17.1545 20.7686C17.2686 20.7315 17.3676 20.6325 17.5656 20.4345L20.4343 17.5659C20.6323 17.3679 20.7313 17.2689 20.7684 17.1547C20.801 17.0543 20.801 16.9461 20.7684 16.8457C20.7313 16.7315 20.6323 16.6325 20.4343 16.4345L15.9999 12.0002L19.047 8.95311C19.3609 8.63924 19.5178 8.48231 19.5441 8.32402C19.567 8.18589 19.5309 8.04448 19.4447 7.93419C19.3458 7.8078 19.1329 7.74518 18.7071 7.61993L4.40701 3.41403Z" stroke="#00796b" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </textarea>
+        <label for="hover-custom-size">Size (px):</label>
+        <input id="hover-custom-size" type="number" min="1" max="256" value="32" />
+        <label for="hover-custom-color">Color (fill):</label>
+        <input id="hover-custom-color" type="color" value="#00a895" />
+        <small>Enter valid SVG elements inside &lt;svg&gt; (do not include &lt;svg&gt; wrapper). Example: &lt;circle cx="6" cy="6" r="6" fill="blue"/&gt;. Color will replace fill attributes if applicable.</small>
+      </fieldset>
+      <small>Note: Only one shape here.</small>
+    </section>
+
+    <section id="preview-section">
+      <h2>Live Preview</h2>
+      <p>Hover or interact with links, buttons, radios, and checkboxes to see the cursors applied using CSS variables.</p>
+      <div id="preview-area" tabindex="0" aria-label="Cursor preview area" style="border: 2px dashed #00796b; border-radius:8px; padding:2rem; margin-top:1rem; user-select:none;">
+        <p>Try hovering this <a href="#" tabindex="0">link</a>, <button type="button">button</button>, <label><input type="radio" name="preview-radio"> radio</label>, <label><input type="checkbox"> checkbox</label>.</p>
+        <p>The base cursor is applied to this entire box and document.</p>
+      </div>
+    </section>
+
+    <section id="output-container">
+      <h2 id="generated-css-title">Generated CSS Code</h2>
+      <button id="copy-button" aria-label="Copy CSS code to clipboard">Copy to Clipboard</button>
+      <pre id="css-output" tabindex="0" aria-label="Generated CSS code"></pre>
+    </section>
+
+
+    <a href="https://github.com/YasinC2/Custom-SVG-Cursor-CSS-Generator" class="github-corner" aria-label="View source on GitHub" title="View source on GitHub" style="clip-path: polygon(100% 0%, 0% 0%, 100% 100%);display: inline-block;width: 70px;height: 70px;position: absolute;top: 0px;right: 0px;top: 0;">
+      <svg width="70" height="70" viewBox="0 0 21.147 21.147" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" fill="#00796b">
+        <path d="M21.147 0H0l9.535 9.535c.024-.025.1-.03.125-.059.258-.23.502-.48.737-.735-.116-.084-.234-.168-.338-.268-.284-.247-.509-.585-.537-.969-.05-.352.178-.652.223-.99.049-.225-.018-.45-.027-.675-.015-.072.03-.167.115-.142.243.091.37.36.402.604.064.354-.12.7-.047 1.054.068.407.423.699.792.843.18-.122.378-.231.597-.259.032-.013.116.008.116-.017-.39-.488-.72-1.073-.725-1.714-.013-.672.348-1.289.8-1.76.377-.44.928-.72 1.505-.763.071-.057.104-.17.164-.247.208-.274.472-.516.785-.665.078-.049.169-.091.229.006.265.28.39.659.494 1.021.04.115.038.253.099.355.344.213.678.445.959.738.316.3.604.63.827 1.005.048.098.108.176.227.173.427.102.877.225 1.212.525.032.035.088.078.073.132a2.064 2.064 0 0 1-.967 1.044c-.009.39-.147.774-.368 1.093a3.65 3.65 0 0 1-1.186 1.002 2.012 2.012 0 0 1-1.067.221c-.608-.029-1.148-.366-1.618-.726a1.283 1.283 0 0 1-.234.666c-.421.479-.896.909-1.322 1.383-.038.022-.029.093-.052.117l9.62 9.619z" />
+      </svg>
+    </a>
+
+    <script src="script.js"></script>
+  </body>
+
+</html>
