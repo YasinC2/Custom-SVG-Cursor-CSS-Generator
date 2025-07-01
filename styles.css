@@ -105,7 +105,7 @@ textarea {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
-  cursor: pointer;
+  /* cursor: pointer; */
   background-color: #fff;
   transition: border-color 0.25s ease;
   resize: vertical;
@@ -142,14 +142,23 @@ output {
   padding: 1.5rem;
 }
 
-#preview-area, html {
+#preview-area,
+html {
   cursor: var(--cursor-base, auto);
 }
 
 #preview-area a,
 #preview-area button,
 #preview-area input[type="radio"],
-#preview-area input[type="checkbox"] {
+#preview-area input[type="checkbox"],
+a,
+button,
+input,
+select,
+textarea,
+details,
+summary,
+.cursor-pointer {
   cursor: var(--cursor-hover, pointer);
 }
 
@@ -175,7 +184,7 @@ output {
   color: white;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
+  /* cursor: pointer; */
   user-select: none;
   transition: background-color 0.2s ease;
   vertical-align: middle;
@@ -257,7 +266,7 @@ footer {
   border-radius: 4px;
   width: 30px;
   height: 30px;
-  cursor: pointer;
+  /* cursor: pointer; */
   user-select: none;
   padding: 0;
   position: relative;

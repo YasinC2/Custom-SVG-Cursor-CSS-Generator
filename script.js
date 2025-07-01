@@ -177,7 +177,16 @@ function buildSvgWrapper(innerContent, size) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">${innerContent}</svg>`;
 }
 
-function getCursorCssValue(svgString, size, hotX, hotY) {
+function getBaseCursorCssValue(svgString, size, hotX, hotY) {
+  // returns CSS cursor url() value with proper encoding & hotspot position
+  // Clamp hotspot coords between 0 and size
+  const clampedHotX = Math.min(Math.max(hotX, 0), size);
+  const clampedHotY = Math.min(Math.max(hotY, 0), size);
+
+  return `url("data:image/svg+xml,${encodeSvg(svgString)}") ${clampedHotX} ${clampedHotY}, auto`;
+}
+
+function getHoverCursorCssValue(svgString, size, hotX, hotY) {
   // returns CSS cursor url() value with proper encoding & hotspot position
   // Clamp hotspot coords between 0 and size
   const clampedHotX = Math.min(Math.max(hotX, 0), size);
@@ -385,13 +394,13 @@ function updateOutputs() {
     hoverSvg = buildHoverCursorSvg(hoverShape, hoverSize, hoverColor, hoverOpacity);
   }
 
-  const baseCursorCss = getCursorCssValue(baseSvg, baseShape === "custom" ? baseCustomSize : baseOuterSize, baseHotspotX, baseHotspotY);
-  const hoverCursorCss = getCursorCssValue(hoverSvg, hoverShape === "custom" ? hoverCustomSize : hoverSize, hoverHotspotX, hoverHotspotY);
+  const baseCursorCss = getBaseCursorCssValue(baseSvg, baseShape === "custom" ? baseCustomSize : baseOuterSize, baseHotspotX, baseHotspotY);
+  const hoverCursorCss = getHoverCursorCssValue(hoverSvg, hoverShape === "custom" ? hoverCustomSize : hoverSize, hoverHotspotX, hoverHotspotY);
 
   const cssCode = `html {
   cursor: ${baseCursorCss};
 }
-a, button, input[type=radio], input[type=checkbox] {
+a, button, input, select, textarea, details, summary, .cursor-pointer  {
   cursor: ${hoverCursorCss} !important;
 }
 `;
